@@ -26,6 +26,10 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
+    const TYPE_ADMIN = 'admin';
+    const TYPE_DOCTOR = 'doctor';
+    const TYPE_RECEPTIONIST = 'receptionist';
+
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
@@ -37,5 +41,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->type === self::TYPE_ADMIN;
+    }
+
+    public function isDoctor(): bool
+    {
+        return $this->type === self::TYPE_DOCTOR;
+    }
+
+    public function isReceptionist(): bool
+    {
+        return $this->type === self::TYPE_RECEPTIONIST;
+    }
+
+    public function isAppointmentDoctor(Appointment $appointment): bool
+    {
+        return $this->isDoctor() && $this->id === $appointment->doctor_id;
     }
 }
