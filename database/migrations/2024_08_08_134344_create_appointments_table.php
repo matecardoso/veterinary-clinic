@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('symptoms');
             $table->date('appointment_date');
             $table->enum('day_period', ['MORNING', 'AFTERNOON']);
-            $table->foreignId('doctor_id')->constrained('users');
-            $table->foreignId('receptionist_id')->constrained('users');
+            $table->foreignId('doctor_id')->nullable()->constrained('users');
+            $table->foreignId('receptionist_id')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });
