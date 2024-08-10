@@ -11,7 +11,7 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register')
     ]);
-});
+})->name('home');;
 
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 

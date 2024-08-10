@@ -25,7 +25,7 @@ class AppointmentController extends Controller
 	{
 		Appointment::create($request->validated());
 
-		return redirect()->route('appointments.index')->with('success', 'Appointment created successfully');
+		return redirect()->route('home')->with('success', 'Appointment created successfully');
 	}
 
 	public function show(Appointment $appointment)

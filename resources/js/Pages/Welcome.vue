@@ -1,14 +1,21 @@
 <script setup>
+import { ref, provide } from 'vue';
 import { Head } from '@inertiajs/vue3';
-import { VApp, VMain, VContainer, VRow, VCol, VToolbar, VToolbarTitle } from 'vuetify/components';
+import { VApp, VMain, VContainer, VRow, VCol, VAlert, VToolbar, VToolbarTitle, VSpacer } from 'vuetify/components';
 import AppointmentForm from '@/Components/AppointmentForm.vue';
+
+const flashSuccess = ref(null);
+const flashError = ref(null);
+
+provide('flashSuccess', flashSuccess);
+provide('flashError', flashError);
 </script>
 
 <template>
 
     <Head title="Welcome" />
     <v-app>
-        <v-toolbar color="white" class="px-8">
+        <v-toolbar color="white" class="px-8" style="height: 70px;">
             <v-toolbar-title class="text-primary" style="margin-left: 16px; font-size: 30px; font-weight: 700;">
                 O Patusco
             </v-toolbar-title>
@@ -23,6 +30,16 @@ import AppointmentForm from '@/Components/AppointmentForm.vue';
             <v-container class="py-8" fluid>
                 <v-row justify="space-between" align="center" class="pa-4 rounded"
                     style="max-width: 1200px; margin: auto; background-color: rgba(255, 255, 255, 0.8); padding: 16px; border-radius: 8px;">
+                    <v-col v-if="flashSuccess" cols="12">
+                        <v-alert type="success" class="text-center mt-4" closable v-model="flashSuccess">
+                            {{ flashSuccess }}
+                        </v-alert>
+                    </v-col>
+                    <v-col v-if="flashError" cols="12">
+                        <v-alert type="error" class="text-center mt-4" closable v-model="flashError">
+                            {{ flashError }}
+                        </v-alert>
+                    </v-col>
                     <v-col md="7" sm="12">
                         <h1 class="text-primary mb-4" style="font-size: 36px; line-height: 1.2; font-weight: 700;">
                             The Best Care for Your Beloved Pet
